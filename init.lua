@@ -44,7 +44,12 @@ require("lazy").setup({
   -- comment support
  { "danymat/neogen", config = true},
   -- status line
- {"ecthelionvi/NeoColumn.nvim",opts = {}},
+ {'ecthelionvi/NeoColumn.nvim', opts = {always_on = true}},
+ {"nvim-tree/nvim-tree.lua", version = "*", lazy = false, dependencies = { "nvim-tree/nvim-web-devicons"},
+  config = function()
+    require("nvim-tree").setup {}
+  end,
+ }
 },
 checker = { enabled = true },
 })
@@ -59,3 +64,7 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
+-- File explorer keybindings
+local explorer = require "nvim-tree.api"
+vim.keymap.set('n', '<leader>xo',explorer.tree.toggle,{})
+vim.keymap.set('n', '<leader>xf',explorer.tree.focus,{})
